@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jaideep Singh Hada - Cybersecurity Portfolio</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script>
+      // Tailwind configuration
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "bg-dark": "#121212",
+              "bg-light": "#f4f4f4",
+              "accent-primary": "#6a11cb",
+              "accent-secondary": "#2575fc",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      .strikethrough .line {
+        position: relative;
+        display: inline-block;
+      }
+      .strikethrough .strike-line {
+        position: absolute;
+        top: 60%;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: red;
+        transform: translateY(-50%);
+        transition: width 0.3s ease;
+      }
+      .gradient-text {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .motivational-text {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #a3a3a3;
+        opacity: 0.9;
+      }
+
+      .motivational-highlight {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        margin-top: 20px;
+      }
+      /* Wave Transition Styles */
+      .theme-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        background: linear-gradient(
+          45deg,
+          rgba(106, 17, 203, 0.5),
+          rgba(37, 117, 252, 0.5)
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .theme-transition.active {
+        animation: wave-transition 1s ease forwards;
+      }
+
+      @keyframes wave-transition {
+        0%,
+        100% {
+          clip-path: circle(0% at 50% 50%);
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          clip-path: circle(150% at 50% 50%);
+          opacity: 0;
+        }
+      }
+      .line {
+        position: relative;
+        display: inline-block;
+      }
+      .strike {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 2px;
+        background-color: rgba(255, 0, 0, 0.341);
+        width: 0;
+        transform: translateY(-50%);
+      }
+
+      /* Project Hover Effect */
+      .project-item {
+        transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+      }
+
+      .blur-all:not(.highlighted-project) {
+        filter: blur(5px);
+      }
+
+      .highlighted-project {
+        filter: none !important;
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body class="bg-bg-dark text-white dark:bg-bg-light dark:text-black">
+    <!-- Wave Transition Overlay -->
+    <div id="theme-transition" class="theme-transition"></div>
+
+    <!-- Header -->
+    <header
+      class="fixed w-full top-0 z-40 bg-transparent transition-colors duration-300"
+      id="main-header"
+    >
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <!-- Time Display -->
+        <div
+          id="current-time"
+          class="text-2xl font-bold text-accent-primary"
+        ></div>
+
+        <!-- Theme Toggle and Navigation -->
+        <div class="flex items-center space-x-4">
+          <button
+            id="theme-toggle"
+            class="p-2 rounded-full hover:bg-white/10 transition"
+          >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+          <nav>
+            <ul class="flex space-x-4">
+              <li>
+                <a href="#home" class="hover:text-accent-primary transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#about" class="hover:text-accent-primary transition"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a href="#projects" class="hover:text-accent-primary transition"
+                  >Projects</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="hover:text-accent-primary transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="min-h-screen flex items-center justify-between bg-gradient-to-br from-bg-dark to-[#1a1a2e] dark:from-bg-light dark:to-[#e0e0e0]"
+      >
+        <div class="container mx-auto px-4 flex items-center">
+          <div class="w-1/2">
+            <!-- Motivational Text -->
+            <p id="textbox" class="motivational-text"></p>
+            <p class="motivational-highlight">
+              BE THE SMARTEST PERSON IN THE ROOM
+            </p>
+          </div>
+          <div class="w-1/2 pl-24 text-right">
+            <h1
+              class="text-5xl md:text-6xl font-bold mb-4 gradient-text leading-normal"
+              style="line-height: 1.4"
+            >
+              Jaideep Singh Hada
+            </h1>
+            <p class="text-xl max-w-2xl mb-8 text-white/80 dark:text-black/80">
+              Cybersecurity Analyst | Penetration Tester | Vulnerability
+              Researcher. <br />
+              Passionate about securing systems and exploring the depths of
+              cybersecurity.
+            </p>
+            <div class="flex justify-end space-x-4 mb-8">
+              <a
+                href="#contact"
+                class="bg-gradient-to-r from-accent-primary to-accent-secondary text-white px-6 py-3 rounded-lg hover:scale-105 transition"
+              >
+                Get In Touch
+              </a>
+            </div>
+            <div class="flex justify-end space-x-6">
+              <a
+                href="https://www.linkedin.com/in/jaideep-singh-hada-ab7803215/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-3xl hover:text-accent-primary transition"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a
+                href="https://github.com/jaideepsingh-cloud"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-3xl hover:text-accent-primary transition"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+              <a
+                href="mailto:javihada8080@gmail.com"
+                class="text-3xl hover:text-accent-primary transition"
+              >
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="py-20 bg-[#1e1e1e] dark:bg-gray-100">
+        <div class="container mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-12 text-accent-primary">
+            About Me
+          </h2>
+          <div class="max-w-4xl mx-auto text-center">
+            <p class="text-lg mb-6 text-white/90 dark:text-black/90">
+              Hello! I'm Jaideep Singh Hada, a Cybersecurity Analyst currently
+              pursuing my Bachelor of Technology in Information Security at
+              Vellore Institute of Technology (VIT). I specialize in penetration
+              testing, vulnerability assessment, and developing innovative
+              security solutions.
+            </p>
+            <p class="text-lg text-white/80 dark:text-black/80">
+              My passion lies in creating secure environments and tackling
+              modern cybersecurity challenges. With a keen eye for details and a
+              proactive approach to security, I aim to stay ahead of emerging
+              threats.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="py-20 bg-bg-dark dark:bg-bg-light">
+        <div class="container mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-12 text-accent-primary">
+            Projects
+          </h2>
+
+          <div class="grid md:grid-cols-3 gap-8 project-container">
+            <div
+              class="bg-white/5 dark:bg-black/5 p-6 rounded-lg shadow-lg hover:scale-105 transition project-item"
+            >
+              <h3 class="text-2xl font-semibold mb-4 text-accent-primary">
+                Content Access Management System
+              </h3>
+              <p class="text-white/80 dark:text-black/80">
+                Developed a secure user access management system, reducing
+                unauthorized access by 40%. Implemented role-based access
+                controls for 50+ users, achieving a 30% reduction in data
+                breaches.
+              </p>
+            </div>
+            <div
+              class="bg-white/5 dark:bg-black/5 p-6 rounded-lg shadow-lg hover:scale-105 transition project-item"
+            >
+              <h3 class="text-2xl font-semibold mb-4 text-accent-primary">
+                Ethical Hacking of E-commerce Website
+              </h3>
+              <p class="text-white/80 dark:text-black/80">
+                Conducted comprehensive penetration testing using Burp Suite and
+                Nmap. Identified 15 critical vulnerabilities and delivered a
+                security enhancement roadmap, leading to a 60% improvement in
+                security posture.
+              </p>
+            </div>
+            <div
+              class="bg-white/5 dark:bg-black/5 p-6 rounded-lg shadow-lg hover:scale-105 transition project-item"
+            >
+              <h3 class="text-2xl font-semibold mb-4 text-accent-primary">
+                Anomaly Detection System
+              </h3>
+              <p class="text-white/80 dark:text-black/80">
+                Designed and implemented an advanced anomaly detection system
+                using machine learning. Leveraged Python, Scikit-learn, and
+                Snort for real-time threat detection and automated response
+                mechanisms.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-20 bg-[#1e1e1e] dark:bg-gray-100">
+        <div class="container mx-auto px-4">
+          <h2 class="text-4xl font-bold text-center mb-12 text-accent-primary">
+            Contact Me
+          </h2>
+          <form id="contact-form" class="max-w-md mx-auto">
+            <div class="mb-4">
+              <label for="name" class="block mb-2 text-white dark:text-black"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full p-3 bg-white/10 dark:bg-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block mb-2 text-white dark:text-black"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full p-3 bg-white/10 dark:bg-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block mb-2 text-white dark:text-black"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                class="w-full p-3 bg-white/10 dark:bg-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              ></textarea>
+            </div>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="bg-gradient-to-r from-accent-primary to-accent-secondary text-white px-6 py-3 rounded-lg hover:scale-105 transition"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/5 dark:bg-black/5 py-6 text-center">
+      <p>&copy; 2024 Jaideep Singh Hada. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      const textbox = document.getElementById("textbox");
+      const lines = [
+        "Remove unnecessary words",
+        "that you don't need",
+        "in sentences.",
+      ];
+      const tl = gsap.timeline();
+      function appearLines() {
+        lines.forEach((line, index) => {
+          const lineContainer = document.createElement("div");
+          lineContainer.className = "line";
+          lineContainer.id = `line-${index}`;
+          textbox.appendChild(lineContainer);
+
+          const strikeLine = document.createElement("span");
+          strikeLine.className = `strike-line`;
+          lineContainer.appendChild(strikeLine);
+
+          const words = line.split(" ");
+          words.forEach((word) => {
+            const letters = word.split("");
+            letters.forEach((letter) => {
+              tl.to(
+                {},
+                {
+                  onStart: () => {
+                    lineContainer.innerHTML =
+                      lineContainer.innerHTML.replace(
+                        `<span class="strike"></span>`,
+                        ""
+                      ) + letter;
+                    lineContainer.appendChild(strikeLine);
+                  },
+                  duration: 0.01,
+                }
+              );
+            });
+            tl.to(
+              {},
+              {
+                onStart: () => {
+                  lineContainer.innerHTML =
+                    lineContainer.innerHTML.replace(
+                      `<span class="strike"></span>`,
+                      ""
+                    ) + "&nbsp;";
+                  lineContainer.appendChild(strikeLine);
+                },
+                duration: 0.01,
+              }
+            );
+          });
+        });
+      }
+      function toggled() {
+        tl.add(() => {
+          textbox.classList.add("strikethrough");
+        });
+        tl.to(`#line-1 .strike-line`, {
+          width: "97%",
+          duration: 1,
+          ease: "power2.inOut",
+        });
+        tl.from(".motivational-highlight", {
+          opacity: 0,
+          delay:0.3,
+          duration: 0.6,
+          x: -90,
+          ease: "bounce",
+        });
+      }
+      appearLines();
+      toggled();
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const projectItems = document.querySelectorAll(".project-item");
+        const timeElement = document.getElementById("current-time");
+
+        // Update time
+        const updateTime = () => {
+          const now = new Date();
+          const hours = now.getHours().toString().padStart(2, "0");
+          const minutes = now.getMinutes().toString().padStart(2, "0");
+          const seconds = now.getSeconds().toString().padStart(2, "0");
+          timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        };
+
+        // Initialize time
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Enhanced project hover effect
+        projectItems.forEach((item) => {
+          item.addEventListener("mouseenter", () => {
+            // Blur all other project items except the hovered one
+            projectItems.forEach((otherItem) => {
+              if (otherItem !== item) {
+                otherItem.classList.add("blur-all");
+              } else {
+                otherItem.classList.add("highlighted-project");
+              }
+            });
+          });
+
+          item.addEventListener("mouseleave", () => {
+            // Remove blur effect from all project items
+            projectItems.forEach((otherItem) => {
+              otherItem.classList.remove("blur-all");
+              otherItem.classList.remove("highlighted-project");
+            });
+          });
+        });
+
+        // Theme toggle script
+        const themeToggle = document.getElementById("theme-toggle");
+        const themeTransition = document.getElementById("theme-transition");
+        const htmlElement = document.documentElement;
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+          htmlElement.classList.add("dark");
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener("click", () => {
+          document.getElementById("textbox").innerHTML = "";
+          appearLines();
+          toggled();
+          themeTransition.classList.add("active");
+          setTimeout(() => themeTransition.classList.remove("active"), 1000);
+          htmlElement.classList.toggle("dark");
+          if (htmlElement.classList.contains("dark")) {
+            localStorage.setItem("theme", "dark");
+          } else {
+            localStorage.removeItem("theme");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
